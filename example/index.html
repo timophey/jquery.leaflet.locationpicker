@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<script src="../dist/jquery-2.1.4.min.js"></script>
+		
+		<script src="../dist/leaflet-src.js"></script>
+		<script src="../src/jquery.locationpicker.js"></script>
+		<link rel="stylesheet" href="../dist/leaflet.css">
+		
+		<link rel="stylesheet" href="../dist/L.GeoSearch/src/css/l.geosearch.css" />
+
+		<script>
+			$(function(){
+				$('.picker_multiple').locationpicker({width:600, height: 400});
+				$('.picker_single').locationpicker({width:600, height: 400});
+				});
+		</script>
+		<style>
+		body{margin:125px 25% 500px;}
+		table thead, table tbody td:first-child{font-weight:bold;}
+		pre{background:#EEE;text-shadow:1px 1px 1px #fff;padding:1em;}
+		</style>
+	</head>
+	<body>
+		<h1>Location picker</h1>
+		<ul>
+			<li><a href="">Options</a></li>
+		</ul>
+		<h2>Options</h2>
+		<table border>
+			<thead><tr>
+				<td>option</td>
+				<td>type</td>
+				<td>default</td>
+				<td>&nbsp;</td>
+			</tr></thead>
+			<tbody>
+				<tr><td>width</td><td>string</td><td>200px</td><td>frame width</td></tr>
+				<tr><td>height</td><td>string</td><td>300px</td><td>frame height</td></tr>
+				<tr><td>lat</td><td>float</td><td>51.3</td><td>default center latitude</td></tr>
+				<tr><td>lng</td><td>float</td><td>0.7</td><td>default center longtitude</td></tr>
+				<tr><td>zoom</td><td>int</td><td>0.7</td><td>default zoom</td></tr>
+				<tr><td>sep</td><td>string</td><td>,</td><td>string separator in text field</td></tr>
+				<tr><td>area</td><td>jQuery object</td><td>null</td><td>container to place map</td></tr>
+				<tr><td>single</td><td>bool</td><td>false</td><td>show only one marker on map, hide others</td></tr>
+				<tr><td>fitBounds</td><td>Object</td><td>{padding:[50,50]}</td><td>fit to screen all markers at first open, <br><a href="http://leafletjs.com/reference.html#map-fitboundsoptions" target="_blank">fitBounds method of leaflet</a></td></tr>
+			</tbody>
+		</table>
+		<h2>Examples</h2>
+		<h3>Single</h3>
+		<p>Tyumen: <input class="picker_single" value="57.1535343,65.542275" title="Tyumen"></p>
+		<pre>$('.picker_single').locationpicker({width:600, height: 400});</pre>
+		<h3>Multiple</h3>
+		<p>Moscow: <input class="picker_multiple picker0" value="55.7516335,37.618704" title="Moscow"></p>
+		<p>VKO: <input class="picker_multiple picker1" value="55.5985230,37.269744" title="1st airport"></p>
+		<p>SVO: <input class="picker_multiple picker2" value="55.9741824,37.411880" title="2nd airport"></p>
+		<p>DME: <input class="picker_multiple picker3" value="55.4118664,37.904548" title="3rd airport"></p>
+		<pre>$('.picker_multiple').locationpicker({width:600, height: 400});</pre>
+	</body>
+</html>
