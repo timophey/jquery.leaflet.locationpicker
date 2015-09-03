@@ -90,6 +90,13 @@
 					if ( showing ) return; // else - set position and show =)
 					// set map view
 					methods.area_show.call(this);
+				}).on('keyup change',function(e){
+					if(this.value)
+						methods.parse_location.call(this);
+					else{
+						var el = $(this), data = el.data(), map = data.map, marker = data.marker;
+						map.removeLayer(marker);
+						}
 					});
 				
 				el.data().locationpicked = true;
@@ -178,11 +185,11 @@
 			},
 		leaflet_setView: function(map,ll_str,z){},
 		leaflet_place_marker: function(e){
-				var el = input_current, marker = el.data().marker;
+				var el = input_current, marker = el.data().marker, map = el.data().map;
 				// place marker
 				marker.setLatLng(e.latlng);
-				console.log(e.latlng)
-				//marker.addTo(map);
+				//console.log(e.latlng)
+				marker.addTo(map);
 				methods.save_location.call(marker,e);
 			},
 		find_best_position: function(){
@@ -201,7 +208,7 @@
 				// проверяет, находится ли innerRect целиком в outerRect
 			// try to place under input first
       coords = { left: input_current.offset().left, top: input_current.offset().top + input_current.outerHeight() }
-			console.log(coords)
+			//console.log(coords)
 			// or make float left
 			if(coords.top + input_current.data().area.outerHeight() > by){
 				console.log('off!')
@@ -210,7 +217,7 @@
 			// fix hs bug ]:-)
 			coords.left = Math.round(coords.left)
 			coords.top = Math.round(coords.top)
-			console.log(coords)
+			//console.log(coords)
 			return coords;
 			}
 		}
