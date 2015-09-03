@@ -91,6 +91,7 @@
 					// set map view
 					methods.area_show.call(this);
 				}).on('keyup change',function(e){
+					console.log(e)
 					if(this.value)
 						methods.parse_location.call(this);
 					else{
@@ -127,7 +128,7 @@
 			var el = $(this);
 			var area = el.data().area;
 			var pos = methods.find_best_position(this);
-			area.css(pos);
+			area.css(pos).addClass('locationpicker-active');
 			area.data().showing = true;
 			area.show();
 			if(area.data().fit_it) methods.leaflet_fitBounds.call(this);
@@ -138,7 +139,8 @@
 			if(input_current !== undefined){
 				var opt = el.data().opt;
 				var area = el.data().area;
-				showing = false;
+				area.removeClass('locationpicker-active')
+				area.data().showing = showing = false;
 				}
 			return (opt.area) ?  area : area.hide(); 
 			},
@@ -149,14 +151,15 @@
 			var sep = ',';
 			var val = el.val().toString().split(sep);
 			var marker = el.data().marker;
-			if(typeof(val[0]) == 'string' && val[0] == val[0]*1 && typeof(val[1]) == 'string' && val[1] == val[1]*1){
+			//val[0]*=1; val[1]*=1;
+			if(typeof(val[0]) == 'string' && val[0] == val[0]*1 && typeof(val[1]) == 'string' && val[1] == val[1]*1 /*&&val[0] !== NaN && val[1] !== NaN && typeof(val[0]) == 'number' && typeof(val[1]) == 'number'*/)// typeof(val[0]*1) == 'number' && typeof(val[1]) == 'number'
+				{
 				var latlng = new L.LatLng(val[0],val[1]);
-				//map.setView(latlng);
 				marker.setLatLng(latlng);
-				//marker.addTo(map);
+				if(!marker._map)
+					marker.addTo(map);
 				el.data().latlng = latlng;
 			}else{
-				//el.data().latlng = null;
 				}
 			},
 		save_location: function(e){
