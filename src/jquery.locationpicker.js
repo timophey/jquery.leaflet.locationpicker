@@ -232,7 +232,7 @@
     } else if ( typeof method === 'object' || ! method ) {
       return methods.init.apply( this, arguments );
     } else {
-      $.error( 'Метод ' +  method + ' не существует в jQuery.editors' );
+      $.error( 'Метод ' +  method + ' не существует в jQuery.locationpicker' );
     }
   };
 
